@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8">
+<title>Ultra Modern Glass UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ===== THEME VARIABLES ===== */
+:root{
+    --bg: linear-gradient(135deg,#1e3c72,#2a5298,#6a11cb,#2575fc);
+    --glass-bg: rgba(255,255,255,0.18);
+    --glass-border: rgba(255,255,255,0.3);
+    --text:#ffffff;
+    --accent: linear-gradient(135deg,#00f2fe,#4facfe);
+}
+
+body.light{
+    --bg: linear-gradient(135deg,#e0eafc,#cfdef3);
+    --glass-bg: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.8);
+    --text:#1a1a1a;
+}
+
+/* ===== BASE ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",sans-serif;
+    transition: background .4s,color .4s;
+}
+
+body{
+    min-height:100vh;
+    background:var(--bg);
+    background-size:400% 400%;
+    animation:bgMove 18s ease infinite;
+    color:var(--text);
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* ===== NAV ===== */
+nav{
+    max-width:1200px;
+    margin:20px auto;
+    padding:16px 24px;
+    border-radius:22px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(25px);
+    border:1px solid var(--glass-border);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.links{display:flex;gap:18px;align-items:center}
+
+nav a{
+    cursor:pointer;
+    opacity:.85;
+    text-decoration:none;
+    color:var(--text);
+}
+
+nav a:hover{opacity:1}
+
+/* ===== TOGGLE ===== */
+.toggle{
+    width:52px;
+    height:26px;
+    background:rgba(255,255,255,.35);
+    border-radius:30px;
+    position:relative;
+    cursor:pointer;
+}
+
+.toggle span{
+    width:22px;
+    height:22px;
+    background:#fff;
+    border-radius:50%;
+    position:absolute;
+    top:2px;
+    left:3px;
+    transition:.4s;
+}
+
+body.light .toggle span{
+    transform:translateX(24px);
+}
+
+/* ===== PAGE ===== */
+.page{
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+    display:none;
+    animation:fade .4s ease;
+}
+.page.active{display:block}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.page-title{
+    font-size:32px;
+    text-align:center;
+    margin-bottom:40px;
+}
+
+/* ===== GRID / CARD ===== */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    padding:26px;
+    border-radius:22px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(20px);
+    border:1px solid var(--glass-border);
+}
+
+/* ===== BUTTON ===== */
+.btn{
+    margin-top:16px;
+    padding:12px 26px;
+    border-radius:30px;
+    background:var(--accent);
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    width:100%;
+}
+
+/* ===== LOGIN MODAL ===== */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+}
+
+.modal.active{display:flex}
+
+.modal-box{
+    width:340px;
+    padding:28px;
+    border-radius:24px;
+    background:var(--glass-bg);
+    backdrop-filter:blur(25px);
+    border:1px solid var(--glass-border);
+}
+
+.modal-box h2{text-align:center;margin-bottom:18px}
+
+.modal-box input{
+    width:100%;
+    padding:12px;
+    border-radius:14px;
+    border:none;
+    margin-bottom:14px;
+    outline:none;
+}
+
+/* ===== FOOTER ===== */
+footer{
+    text-align:center;
+    margin:60px 0 30px;
+    opacity:.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+    nav{flex-direction:column;gap:12px}
+    .links{flex-wrap:wrap;justify-content:center}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <h2>Glass UI</h2>
+    <div class="links">
+        <a onclick="showPage('home')">Home</a>
+        <a onclick="showPage('about')">About</a>
+        <a onclick="showPage('services')">Services</a>
+        <a onclick="openLogin()">Login</a>
+        <div class="toggle" onclick="toggleTheme()">
+            <span></span>
+        </div>
+    </div>
+</nav>
+
+<section id="home" class="page active">
+    <h2 class="page-title">Ultra Modern Fluent Website</h2>
+    <div class="grid">
+        <div class="card">🌙 Dark Mode</div>
+        <div class="card">☀️ Light Mode</div>
+        <div class="card">Glass UI</div>
+    </div>
+</section>
+
+<section id="about" class="page">
+    <h2 class="page-title">About</h2>
+    <div class="card">Windows 11 / Fluent Design</div>
+</section>
+
+<section id="services" class="page">
+    <h2 class="page-title">Services</h2>
+    <div class="grid">
+        <div class="card">Web Design</div>
+        <div class="card">UI / UX</div>
+        <div class="card">Dashboard</div>
+    </div>
+</section>
+
+<!-- LOGIN -->
+<div class="modal" id="loginModal">
+    <div class="modal-box">
+        <h2>Sign In</h2>
+        <input placeholder="Username">
+        <input type="password" placeholder="Password">
+        <button class="btn">Login</button>
+    </div>
+</div>
+
+<footer>© 2025 Ultra Modern Glass UI</footer>
+
+<script>
+function showPage(id){
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+}
+
+/* LOGIN */
+function openLogin(){
+    document.getElementById('loginModal').classList.add('active');
+}
+document.getElementById('loginModal').onclick=e=>{
+    if(e.target.id==='loginModal') e.target.classList.remove('active');
+}
+
+/* THEME TOGGLE */
+function toggleTheme(){
+    document.body.classList.toggle('light');
+}
+</script>
+
+</body>
+</html>
